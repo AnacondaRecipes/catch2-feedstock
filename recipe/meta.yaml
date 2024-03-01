@@ -38,9 +38,10 @@ test:
     - if not exist %PREFIX%\\Library\\lib\\cmake\\Catch2\\ParseAndAddCatchTests.cmake exit 1  # [win]
 
 about:
-  home: https://github.com/catchorg/Catch2/
+  home: https://github.com/catchorg/Catch2
   license: BSL-1.0
   license_file: LICENSE.txt
+  license_family: BSL-1.0
   summary: |
     A modern, C++-native, header-only, test framework for unit-tests, TDD and BDD - using 
     C++11, C++14, C++17 and later (or C++03 on the Catch1.x branch).
@@ -48,7 +49,7 @@ about:
     Catch2 stands for C++ Automated Test Cases in a Header and is a multi-paradigm test framework 
     for C++. which also supports Objective-C (and maybe C). It is primarily distributed as a single 
     header file, although certain extensions may require additional headers.
-  doc_url: https://github.com/catchorg/Catch2/blob/master/docs/Readme.md
+  doc_url: https://github.com/catchorg/Catch2
   dev_url: https://github.com/catchorg/Catch2
 
 extra:
