@@ -2,17 +2,13 @@
 
 set -e
 
-mkdir build
-cd build
-
-cmake -LAH -G"Ninja" \
-  -DCMAKE_PREFIX_PATH=${PREFIX} \
-  -DCMAKE_INSTALL_PREFIX=${PREFIX} \
-  -DCMAKE_BUILD_TYPE=Release \
-  ..
+# configure install
+cmake -Bbuild -H. \
+  -DBUILD_TESTING=OFF \
+  -DCMAKE_INSTALL_PREFIX=$PREFIX
 
 # build and install
-cmake --build . --target install
+cmake --build build/ --target install
 
 # test
 ctest -R
