@@ -21,16 +21,16 @@ requirements:
 
 test:
   commands:
-    - test -f "${PREFIX}/include/catch2/catch.hpp"  # [unix]
-    - test -f "${PREFIX}/include/catch2/catch_reporter_automake.hpp"  # [unix]
-    - test -f "${PREFIX}/include/catch2/catch_reporter_tap.hpp"  # [unix]
-    - test -f "${PREFIX}/include/catch2/catch_reporter_teamcity.hpp"  # [unix]
-    - test -f "${PREFIX}/lib/cmake/Catch2/Catch.cmake"  # [unix]
-    - test -f "${PREFIX}/lib/cmake/Catch2/Catch2Config.cmake"  # [unix]
-    - test -f "${PREFIX}/lib/cmake/Catch2/Catch2ConfigVersion.cmake"  # [unix]
-    - test -f "${PREFIX}/lib/cmake/Catch2/Catch2Targets.cmake"  # [unix]
-    - test -f "${PREFIX}/lib/cmake/Catch2/CatchAddTests.cmake"  # [unix]
-    - test -f "${PREFIX}/lib/cmake/Catch2/ParseAndAddCatchTests.cmake"  # [unix]
+    - test -f "${PREFIX}/include/catch2/catch.hpp"  # [not win]
+    - test -f "${PREFIX}/include/catch2/catch_reporter_automake.hpp"  # [not win]
+    - test -f "${PREFIX}/include/catch2/catch_reporter_tap.hpp"  # [not win]
+    - test -f "${PREFIX}/include/catch2/catch_reporter_teamcity.hpp"  # [not win]
+    - test -f "${PREFIX}/lib/cmake/Catch2/Catch.cmake"  # [not win]
+    - test -f "${PREFIX}/lib/cmake/Catch2/Catch2Config.cmake"  # [not win]
+    - test -f "${PREFIX}/lib/cmake/Catch2/Catch2ConfigVersion.cmake"  # [not win]
+    - test -f "${PREFIX}/lib/cmake/Catch2/Catch2Targets.cmake"  # [not win]
+    - test -f "${PREFIX}/lib/cmake/Catch2/CatchAddTests.cmake"  # [not win]
+    - test -f "${PREFIX}/lib/cmake/Catch2/ParseAndAddCatchTests.cmake"  # [not win]
 
     - if not exist %PREFIX%\\Library\\include\\catch2\\catch.hpp exit 1  # [win]
     - if not exist %PREFIX%\\Library\\include\\catch2\\catch_reporter_automake.hpp exit 1  # [win]
