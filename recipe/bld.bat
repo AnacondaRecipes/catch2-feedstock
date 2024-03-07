@@ -7,7 +7,7 @@ cmake -Bbuild -H. ^
 if errorlevel 1 exit 1
 
 :: build and install
-cmake --build build/ --target install
+cmake --build build\ --target install
 if errorlevel 1 exit 1
 
 :: test
