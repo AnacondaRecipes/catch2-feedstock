@@ -1,8 +1,8 @@
 setlocal EnableDelayedExpansion
 
 :: configure
-cmake -Bbuild -H. \
-  -DBUILD_TESTING=OFF \
+cmake -Bbuild -H. ^
+  -DBUILD_TESTING=OFF ^
   -DCMAKE_INSTALL_PREFIX=$PREFIX
 if errorlevel 1 exit 1
 
