@@ -11,6 +11,11 @@ source:
 
 build:
   number: 0
+  ignore_run_exports:
+    - {{ compiler('cxx') }}
+    - libstdcxx-ng  # [linux]
+    - libcxx        # [osx]
+    - vc            # [win]
 
 requirements:
   build:
@@ -20,6 +25,10 @@ requirements:
     - ninja
 
 test:
+  requires:
+    - {{ compiler('cxx') }}
+    - cmake
+    - ninja
   commands:
     - test -f "${PREFIX}/include/catch2/catch.hpp"  # [not win]
     - test -f "${PREFIX}/include/catch2/catch_reporter_automake.hpp"  # [not win]
