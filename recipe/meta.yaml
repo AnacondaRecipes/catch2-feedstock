@@ -1,4 +1,4 @@
-{% set version = "3.5.2" %}
+{% set version = "2.6.0" %}
 {% set name = "catch2" %}
 
 package:
@@ -6,26 +6,26 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tgz
   url: https://github.com/catchorg/Catch2/archive/v{{ version }}.tar.gz
-  sha256: 269543a49eb76f40b3f93ff231d4c24c27a7e16c90e47d2e45bcc564de470c6e
+  sha256: 4c94a685557328eb1b0ed1017ca37c3a378742dc03b558cf02267b6ba8579577
+  patches:
+    - patches/0001-fix-catch-trap-for-mac-os-on-arm.patch  # [osx]
 
 build:
-  skip: true  # [win and vc<14]
   number: 0
-
   ignore_run_exports:
     - {{ compiler('cxx') }}
     - libstdcxx-ng  # [linux]
-    - libcxx  # [osx]
-    - vc  # [win]
-
+    - libcxx        # [osx]
+    - vc            # [win]
 
 requirements:
   build:
     - {{ compiler('cxx') }}
     - cmake
+    - make      # [linux]
     - ninja
+    - patch     # [osx]
 
 test:
   requires:
@@ -34,9 +34,10 @@ test:
     - ninja
 
 about:
-  home: https://github.com/catchorg/Catch2/
+  home: https://github.com/catchorg/Catch2
   license: BSL-1.0
   license_file: LICENSE.txt
+  license_family: OTHER
   summary: |
     A modern, C++-native, header-only, test framework for unit-tests, TDD and BDD - using
     C++11, C++14, C++17 and later (or C++03 on the Catch1.x branch).
@@ -44,10 +45,9 @@ about:
     Catch2 stands for C++ Automated Test Cases in a Header and is a multi-paradigm test framework
     for C++. which also supports Objective-C (and maybe C). It is primarily distributed as a single
     header file, although certain extensions may require additional headers.
-  doc_url: https://github.com/catchorg/Catch2/blob/master/docs/Readme.md
+  doc_url: https://github.com/catchorg/Catch2
   dev_url: https://github.com/catchorg/Catch2
 
 extra:
   recipe-maintainers:
     - mjscosta
-    - tdegeus

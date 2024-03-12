@@ -1,0 +1,56 @@
+From 9a9ccc4aa83aad52ac23c859fde662809ca5d22d Mon Sep 17 00:00:00 2001
+From: Lorenzo Pirritano <lpirritano@anaconda.com>
+Date: Mon, 11 Mar 2024 21:36:16 -0600
+Subject: [PATCH] fix-catch-trap-for-mac-os-on-arm
+
+See issue:
+https://github.com/catchorg/Catch2/issues/1127
+
+See resolution for 3.x:
+https://github.com/catchorg/Catch2/commit/a25c1a24af8bffd35727a888a307ff0280cf9387
+
+And backport for 1.x:
+https://github.com/catchorg/Catch2/pull/2151/commits/bb6d08323f23a39eb65dd86671e68f4f5d3f2d6c
+
+---
+ include/internal/catch_debugger.h | 6 +++++-
+ single_include/catch2/catch.hpp   | 6 +++++-
+ 2 files changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/include/internal/catch_debugger.h b/include/internal/catch_debugger.h
+index db3ff681..69b757fa 100644
+--- a/include/internal/catch_debugger.h
++++ b/include/internal/catch_debugger.h
+@@ -17,7 +17,11 @@ namespace Catch {
+ 
+ #ifdef CATCH_PLATFORM_MAC
+ 
+-    #define CATCH_TRAP() __asm__("int $3\n" : : ) /* NOLINT */
++    #if defined(__i386__) || defined(__x86_64__)
++        #define CATCH_TRAP() __asm__("int $3\n" : : ) /* NOLINT */
++    #elif defined(__aarch64__)
++        #define CATCH_TRAP()  __asm__(".inst 0xd4200000")
++    #endif
+ 
+ #elif defined(CATCH_PLATFORM_LINUX)
+     // If we can use inline assembler, do it because this allows us to break
+diff --git a/single_include/catch2/catch.hpp b/single_include/catch2/catch.hpp
+index cc3f97cb..315ba911 100644
+--- a/single_include/catch2/catch.hpp
++++ b/single_include/catch2/catch.hpp
+@@ -5818,7 +5818,11 @@ namespace Catch {
+ 
+ #ifdef CATCH_PLATFORM_MAC
+ 
+-    #define CATCH_TRAP() __asm__("int $3\n" : : ) /* NOLINT */
++    #if defined(__i386__) || defined(__x86_64__)
++        #define CATCH_TRAP() __asm__("int $3\n" : : ) /* NOLINT */
++    #elif defined(__aarch64__)
++        #define CATCH_TRAP()  __asm__(".inst 0xd4200000")
++    #endif
+ 
+ #elif defined(CATCH_PLATFORM_LINUX)
+     // If we can use inline assembler, do it because this allows us to break
+-- 
+2.39.1
+
