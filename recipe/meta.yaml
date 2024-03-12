@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/catchorg/Catch2/archive/v{{ version }}.tar.gz
   sha256: 4c94a685557328eb1b0ed1017ca37c3a378742dc03b558cf02267b6ba8579577
+  patches:
+    - patches/0001-fix-catch-trap-for-mac-os-on-arm.patch  # [osx]
 
 build:
   number: 0
@@ -21,8 +23,9 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - cmake
-    - make # [linux]
+    - make      # [linux]
     - ninja
+    - patch     # [osx]
 
 test:
   requires:
