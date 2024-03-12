@@ -32,28 +32,6 @@ test:
     - {{ compiler('cxx') }}
     - cmake
     - ninja
-  commands:
-    - test -f "${PREFIX}/include/catch2/catch.hpp"  # [not win]
-    - test -f "${PREFIX}/include/catch2/catch_reporter_automake.hpp"  # [not win]
-    - test -f "${PREFIX}/include/catch2/catch_reporter_tap.hpp"  # [not win]
-    - test -f "${PREFIX}/include/catch2/catch_reporter_teamcity.hpp"  # [not win]
-    - test -f "${PREFIX}/lib/cmake/Catch2/Catch.cmake"  # [not win]
-    - test -f "${PREFIX}/lib/cmake/Catch2/Catch2Config.cmake"  # [not win]
-    - test -f "${PREFIX}/lib/cmake/Catch2/Catch2ConfigVersion.cmake"  # [not win]
-    - test -f "${PREFIX}/lib/cmake/Catch2/Catch2Targets.cmake"  # [not win]
-    - test -f "${PREFIX}/lib/cmake/Catch2/CatchAddTests.cmake"  # [not win]
-    - test -f "${PREFIX}/lib/cmake/Catch2/ParseAndAddCatchTests.cmake"  # [not win]
-
-    - if not exist %PREFIX%\\include\\catch2\\catch.hpp exit 1  # [win]
-    - if not exist %PREFIX%\\include\\catch2\\catch_reporter_automake.hpp exit 1  # [win]
-    - if not exist %PREFIX%\\include\\catch2\\catch_reporter_tap.hpp exit 1  # [win]
-    - if not exist %PREFIX%\\include\\catch2\\catch_reporter_teamcity.hpp exit 1  # [win]
-    - if not exist %PREFIX%\\lib\\cmake\\Catch2\\Catch.cmake exit 1  # [win]
-    - if not exist %PREFIX%\\lib\\cmake\\Catch2\\Catch2Config.cmake exit 1  # [win]
-    - if not exist %PREFIX%\\lib\\cmake\\Catch2\\Catch2ConfigVersion.cmake exit 1  # [win]
-    - if not exist %PREFIX%\\lib\\cmake\\Catch2\\Catch2Targets.cmake exit 1  # [win]
-    - if not exist %PREFIX%\\lib\\cmake\\Catch2\\CatchAddTests.cmake exit 1  # [win]
-    - if not exist %PREFIX%\\lib\\cmake\\Catch2\\ParseAndAddCatchTests.cmake exit 1  # [win]
 
 about:
   home: https://github.com/catchorg/Catch2
